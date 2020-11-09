@@ -6,6 +6,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestsTarget", "Testing\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Testing\UnitTests\UnitTests.csproj", "{3997134A-6BDC-4BC8-BAE7-CF03BE16EAEA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{D63933D7-344F-4EA7-BD9A-85ABC5065FA8}"
+ProjectSection(SolutionItems) = preProject
+	SQL\create-multiple-postgresql-databases.sh = SQL\create-multiple-postgresql-databases.sh
+	SQL\postgres.dockerfile = SQL\postgres.dockerfile
+	SQL\docker-compose.yml = SQL\docker-compose.yml
+EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database.EFCore", "SQL\Database.EFCore\Database.EFCore.csproj", "{5C8AAD80-17B4-4F2F-848B-12870392A368}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication.EFCore", "SQL\WebApplication.EFCore\WebApplication.EFCore.csproj", "{809970C6-F20B-41BD-9840-413AA36E3319}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +31,19 @@ Global
 		{3997134A-6BDC-4BC8-BAE7-CF03BE16EAEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3997134A-6BDC-4BC8-BAE7-CF03BE16EAEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3997134A-6BDC-4BC8-BAE7-CF03BE16EAEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C8AAD80-17B4-4F2F-848B-12870392A368}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C8AAD80-17B4-4F2F-848B-12870392A368}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C8AAD80-17B4-4F2F-848B-12870392A368}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C8AAD80-17B4-4F2F-848B-12870392A368}.Release|Any CPU.Build.0 = Release|Any CPU
+		{809970C6-F20B-41BD-9840-413AA36E3319}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{809970C6-F20B-41BD-9840-413AA36E3319}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{809970C6-F20B-41BD-9840-413AA36E3319}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{809970C6-F20B-41BD-9840-413AA36E3319}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EE5737B3-11EC-442D-81A3-5352C845EB0C} = {B2F81F31-9914-4AE8-AC66-75344D1AB366}
 		{3997134A-6BDC-4BC8-BAE7-CF03BE16EAEA} = {B2F81F31-9914-4AE8-AC66-75344D1AB366}
+		{5C8AAD80-17B4-4F2F-848B-12870392A368} = {D63933D7-344F-4EA7-BD9A-85ABC5065FA8}
+		{809970C6-F20B-41BD-9840-413AA36E3319} = {D63933D7-344F-4EA7-BD9A-85ABC5065FA8}
 	EndGlobalSection
 EndGlobal
