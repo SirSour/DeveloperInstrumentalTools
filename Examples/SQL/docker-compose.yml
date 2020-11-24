@@ -18,7 +18,21 @@ services:
       - POSTGRES_MULTIPLE_DATABASES=exampledb
     networks:
       - internal
-
+    
+  userroles:
+    container_name: 'users.app'
+    restart: always
+    image: userroles
+    build:
+      context: ./
+      dockerfile: userroles.dockerfile
+    ports:
+      - "5000:80"
+    links:
+      - "postgres"
+    networks:
+      - internal
+  
 networks:
   internal:
     driver: bridge

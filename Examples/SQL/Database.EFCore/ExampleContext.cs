@@ -10,6 +10,10 @@ namespace Database.EFCore
         public DbSet<SummaryEntity> Summaries { get; set; }
         public DbSet<WeatherEntity> Weathers { get; set; }
         
+        public DbSet<UserEntity> Users { get; set; }
+        
+        public DbSet<RoleEntity> Role { get; set; }
+        
         public ExampleContext()
         {
         }
@@ -82,6 +86,55 @@ namespace Database.EFCore
             });
             
             //modelBuilder.Entity<WeatherEntity>().OwnsOne(p => p.Summary).HasData(new { Date = new DateTime(2020, 1, 1), Temperature = -1, Code = "Chill" });
+            
+            modelBuilder.Entity<UserEntity>(entity =>
+            {
+                entity.ToTable("User");
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).UseIdentityColumn();
+                entity.HasOne(d => d.Role);
+            });
+
+            modelBuilder.Entity<RoleEntity>(entity =>
+            {
+                entity.ToTable("Role");
+                entity.HasKey(x => x.Id);
+                entity.Property(x => x.Id).UseIdentityColumn();
+            });
+            
+            modelBuilder.Entity<RoleEntity>().HasData(new RoleEntity { Id = 1, RoleName = "Admin" });
+            modelBuilder.Entity<RoleEntity>().HasData(new RoleEntity { Id = 2, RoleName = "PM" });
+            modelBuilder.Entity<RoleEntity>().HasData(new RoleEntity { Id = 3, RoleName = "QA" });
+            modelBuilder.Entity<RoleEntity>().HasData(new RoleEntity { Id = 4, RoleName = "Programmer" });
+            
+            modelBuilder.Entity<UserEntity>().HasData(new
+            {
+                Id = 1,
+                RoleId = 1,
+                UserName = "Pupkin Vasiliy"
+            });
+
+
+            modelBuilder.Entity<UserEntity>().HasData(new
+            {
+                Id = 2,
+                RoleId = 3,
+                UserName = "Sidorov Saveliy"
+            });
+            
+            modelBuilder.Entity<UserEntity>().HasData(new
+            {
+                Id = 3,
+                RoleId = 4,
+                UserName = "Petrov Mark"
+            });
+            modelBuilder.Entity<UserEntity>().HasData(new
+            {
+                Id = 4,
+                RoleId = 2,
+                UserName = "Ivanov Ivan"
+            });
+            
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

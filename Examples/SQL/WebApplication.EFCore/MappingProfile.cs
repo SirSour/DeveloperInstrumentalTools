@@ -9,11 +9,15 @@ namespace WebApplication.EFCore
         {
             this.CreateMap<WeatherEntity, WeatherForecast>()
                 .ForMember(
-                    dst => dst.Summary, 
+                    dst => dst.Summary,
                     opt => opt.MapFrom(src => src.Summary.Code))
                 .ForMember(
                     dst => dst.TemperatureC,
                     opt => opt.MapFrom(src => src.Temperature));
+
+            this.CreateMap<UserEntity, UserRoles>()
+                .ForMember(dst => dst.Role,
+                    opt => opt.MapFrom(src => src.Role.RoleName));
         }
     }
 }
