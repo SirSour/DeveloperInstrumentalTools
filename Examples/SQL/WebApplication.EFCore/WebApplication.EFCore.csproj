@@ -2,6 +2,11 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <PackageId>Alla.WebAppDocker</PackageId>
+        <Version>1.0.1</Version>
+        <Authors>Alla</Authors>
+        <Description>Test</Description>
+        <IsPackable>true</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
