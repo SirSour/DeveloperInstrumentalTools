@@ -1,0 +1,31 @@
+@model UserRoles
+
+@{
+    ViewBag.Title = "Users and roles";
+    Layout = "_Layout";
+}
+
+<h3>Users and roles</h3>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            Users
+        </div>
+        <div class="col">
+            Roles
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @this.Model.UserName
+        </div>
+        <div class="col">
+            @this.Model.Role
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @Html.ActionLink("Back to list", "Index")
+        </div>
+    </div>
+</div>
