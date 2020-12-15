@@ -1,0 +1,30 @@
+@model IEnumerable<UserRoles>
+
+@{
+    ViewBag.Title = "Users and roles";
+    Layout = "_Layout";
+}
+
+<h2>Users and roles</h2>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      Users
+    </div>
+    <div class="col">
+      Roles
+    </div>
+  </div>
+  @foreach (var user in this.Model)
+  {
+    <div class="row">
+      <div class="col">
+        @user.UserName
+      </div>
+      <div class="col">
+        @user.Role
+      </div>
+    </div>
+  }
+</div>

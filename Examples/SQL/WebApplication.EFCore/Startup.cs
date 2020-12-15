@@ -2,19 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Database.EFCore;
-using Database.EFCore.Contracts;
-using Database.EFCore.Implementations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using WebApplication.EFCore.Controllers;
+using WebApplication.EFCore.Models;
+using WebApplication.EFCore.Services;
 
 namespace WebApplication.EFCore
 {
@@ -30,12 +28,12 @@ namespace WebApplication.EFCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddScoped<IWeatherDataAccess, WeatherDataAccess>();
-            services.AddScoped<IUserDataAccess, UserDataAccess>();
-            services.AddAutoMapper(typeof(MappingProfile));
-            services.AddDbContext<ExampleContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("ExampleDbContext")));
+            services.AddControllersWithViews();
+            services.AddHttpClient<IUserRolesService, UserRolesService>(client =>
+                client.BaseAddress = new Uri(this.Configuration.GetSection("ApiOptions")["Url"]));
+            //services.AddScoped<IUserRolesService, UserRolesService>();
+            //services.AddDbContext<ExampleContext>(options =>
+                //options.UseNpgsql(Configuration.GetConnectionString("ExampleDbContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,24 +43,25 @@ namespace WebApplication.EFCore
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
-            //app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-            
-            using (var serviceScope = app.ApplicationServices
-                .GetRequiredService<IServiceScopeFactory>()
-                .CreateScope())
+            app.UseEndpoints(endpoints =>
             {
-                using (var context = serviceScope.ServiceProvider.GetService<ExampleContext>())
-                {
-                    context.Database.Migrate();
-                }
-            }
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
         }
     }
 }

@@ -2,20 +2,17 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <PackageId>Alla.WebAppDocker</PackageId>
-        <Version>1.0.1</Version>
-        <Authors>Alla</Authors>
-        <Description>Test</Description>
-        <IsPackable>true</IsPackable>
     </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Database.EFCore\Database.EFCore.csproj" />
-    </ItemGroup>
-
+    
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="10.0.0" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+      <PackageReference Include="Database.EFCore" Version="1.0.0" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\WeatherForecast\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\WeatherForecast\Index.cshtml" />
     </ItemGroup>
 
 
